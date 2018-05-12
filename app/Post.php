@@ -6,6 +6,30 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
+    //saving
+    //saved
+    //updating
+    //updated
+    //deleting
+    //deleted
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        // static::saving(function ($post) {
+        //     if (auth()->check()) {
+        //         $post->user_id = auth()->id();
+        //     }
+        // });
+
+        static::deleting(function ($post) {
+            $post->tags()->sync([]);
+        });
+    }
+
+    protected $guarded = [];
+
     //user
     public function user()
     {
@@ -35,5 +59,18 @@ class Post extends Model
         return join(', ', $this->tags->pluck('name')->map(function ($tag) {
             return "<a href=''>#{$tag}</a>";
         })->toArray());
+    }
+
+    //getters - accessors
+    // public function getTitleAttribute($title)
+    // {
+    //     return strtoupper($title);
+    // }
+
+    //setters - mutators
+    public function setTitleAttribute($title)
+    {
+        $this->attributes['title'] = $title;
+        $this->attributes['slug'] = str_slug($title);
     }
 }

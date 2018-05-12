@@ -28,8 +28,8 @@ class DatabaseSeeder extends Seeder
         $tags = factory(Tag::class, 20)->create();
 
         // 9 utenti
-        $users = factory(User::class, 9)->create();
-
+        factory(User::class, 9)->create();
+        $users = User::all();
         // x ogni utente 15 posts
         foreach ($users as $user) {
             $posts = factory(Post::class, 15)->create([

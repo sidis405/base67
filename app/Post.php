@@ -29,4 +29,11 @@ class Post extends Model
     {
         return $this->morphMany(Comments::class, 'commentable');
     }
+
+    public function tagsList()
+    {
+        return join(', ', $this->tags->pluck('name')->map(function ($tag) {
+            return "<a href=''>#{$tag}</a>";
+        })->toArray());
+    }
 }

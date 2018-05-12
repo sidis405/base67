@@ -4,7 +4,6 @@ Route::get('/', 'PostsController@index')->name('posts.index');
 Route::resource('posts', 'PostsController')->except('index');
 Auth::routes();
 
-
 // Route::get('posts/create', 'PostsController@create')->name('posts.create');
 // Route::get('posts/{post}', 'PostsController@show')->name('posts.show');
 // Route::post('posts', 'PostsController@store')->name('posts.store');
@@ -12,9 +11,7 @@ Auth::routes();
 // Route::patch('posts/{post}', 'PostsController@update')->name('posts.update');
 // Route::delete('posts/{post}', 'PostsController@destroy')->name('posts.destroy');
 
-
 // Route::get('posts/{post}', 'PostsController@show')->name('posts.show')->where('post', '[0-9]+');
-
 
 // CRUD - create - read - update - delete
 // REST

@@ -8,9 +8,11 @@
                 on <strong>{{ $post->created_at->format('d/m/Y H:i') }}</strong>
             </small>
 
-            <div>
-                <span class="pull-right"><small><a href="{{ route('posts.edit', $post) }}">Modifica</a></small></span>
-            </div>
+            @can('update', $post)
+                <div>
+                    <span class="pull-right"><small><a href="{{ route('posts.edit', $post) }}">Modifica</a></small></span>
+                </div>
+            @endcan
         </div>
         <div class="card-body">
             <p>

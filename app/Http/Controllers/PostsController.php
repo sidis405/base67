@@ -47,6 +47,8 @@ class PostsController extends Controller
 
     public function edit(Post $post)
     {
+        $this->authorize('update', $post);
+
         $categories = Category::orderBy('name')->get();
 
         $tags = Tag::orderBy('name')->get();
@@ -56,6 +58,8 @@ class PostsController extends Controller
 
     public function update(Post $post, PostRequest $request)
     {
+        $this->authorize('update', $post);
+
         $post->update($request->validated());
 
         $post->tags()->sync($request->tags);

@@ -1,5 +1,6 @@
 <article>
     <div class="card">
+            <img src="{{ url($post->cover) }}">
         <div class="card-header">
             <h4><a href="{{ route('posts.show', $post) }}">{{ $post->title }}</a></h4>
             <small>

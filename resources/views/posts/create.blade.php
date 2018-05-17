@@ -17,6 +17,12 @@
                 @include('layouts.field_error', ['field' => 'title'])
             </div>
 
+            <div class="form-group">
+                <label for="cover">Choose a cover for this post</label>
+                <input type="file" name="cover" class="form-control{{ $errors->has('cover') ? ' is-invalid' : '' }}">
+                @include('layouts.field_error', ['field' => 'cover'])
+            </div>
+
 
             <div class="form-group">
                 <label for="preview">Preview</label>

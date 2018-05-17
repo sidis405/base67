@@ -28,6 +28,7 @@ class PostRequest extends FormRequest
             'preview' => 'required|min:4',
             'body' => 'required|min:4',
             'category_id' => 'required|integer|exists:categories,id',
+            'cover' => 'sometimes|mimes:jpeg,bmp,png',
         ];
     }
 
@@ -36,6 +37,7 @@ class PostRequest extends FormRequest
         return [
             'category_id.required' => 'Please choose a category',
             'category_id.exists' => 'Fake category you cheeky monkey',
+            'cover.mimes' => 'The only accepted file types are: jpeg,bmp and png',
         ];
     }
 }

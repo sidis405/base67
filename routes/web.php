@@ -1,7 +1,19 @@
 <?php
 
+
 Route::get('/', 'PostsController@index')->name('posts.index');
 Route::resource('posts', 'PostsController')->except('index');
+
+if (app()->environment('local')) {
+    Route::get('update-mail', function () {
+        return new \App\Mail\NotifyOfUpdatedPost(
+            \App\Post::first(),
+            \App\User::find(1),
+            \App\User::find(2)
+        );
+    });
+}
+
 Auth::routes();
 
 // Route::get('posts/create', 'PostsController@create')->name('posts.create');

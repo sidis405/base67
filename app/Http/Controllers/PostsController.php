@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Tag;
 use App\Post;
 use App\Category;
+use App\Utils\CustomResponse;
 use App\Events\PostWasUpdated;
 use App\Http\Requests\PostRequest;
 use App\Repositories\PostRepository;
@@ -21,16 +22,7 @@ class PostsController extends Controller
     {
         $posts = $postRepo->getAllPaginatedPost(15);
 
-        if (request()->wantsJson()) {
-            return response()->json([
-                'response' => 'success',
-                'results' => [
-                    compact('posts'),
-                ],
-            ]);
-        }
-
-        return view('posts.index', compact('posts'));
+        return CustomResponse::respond(request(), 'posts.index', $posts);
     }
 
     public function show(Post $post)

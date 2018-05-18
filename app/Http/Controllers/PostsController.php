@@ -25,6 +25,12 @@ class PostsController extends Controller
 
     public function show(Post $post)
     {
+        // return \App\Comment::with('replies')->get();
+
+        $post->load('comments.user', 'comments.replies.user');
+
+        // return $post;
+
         return view('posts.show', compact('post'));
     }
 

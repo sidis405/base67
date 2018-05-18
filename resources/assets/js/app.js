@@ -15,8 +15,23 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
+// Vue.component('example-component', require('./components/ExampleComponent.vue'));
 
-const app = new Vue({
-    el: '#app'
+// const app = new Vue({
+//     el: '#app'
+// });
+
+$(function(){
+
+    $('.reply-trigger').click(function(event){
+        event.preventDefault();
+
+        let replyForm = $(this).data('reply-id');
+
+        $('.reply-form').not('.main').hide();
+        $('#' + replyForm).show();
+
+        // console.log($(this).data('reply-id'));
+    })
+
 });

@@ -4,6 +4,8 @@
 Route::get('/', 'PostsController@index')->name('posts.index');
 Route::resource('posts', 'PostsController')->except('index');
 
+Route::post('posts/{post}/comments', 'PostCommentsController@store')->name('post-comments.store');
+
 if (app()->environment('local')) {
     Route::get('update-mail', function () {
         return new \App\Mail\NotifyOfUpdatedPost(

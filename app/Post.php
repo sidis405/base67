@@ -51,7 +51,8 @@ class Post extends Model
     //comments
     public function comments()
     {
-        return $this->morphMany(Comments::class, 'commentable');
+        // return $this->morphMany(Comment::class, 'commentable')->latest();
+        return $this->morphMany(Comment::class, 'commentable');
     }
 
     public function tagsList()

@@ -7,6 +7,7 @@ use App\Post;
 use App\Category;
 use App\Events\PostWasUpdated;
 use App\Http\Requests\PostRequest;
+use App\Repositories\PostRepository;
 
 class PostsController extends Controller
 {
@@ -16,20 +17,29 @@ class PostsController extends Controller
         // $this->middleware('auth')->only('create', 'store', 'edit', 'update', 'destroy');
     }
 
-    public function index()
+    public function index(PostRepository $postRepo)
     {
-        $posts = Post::with('user', 'category', 'tags')->latest()->paginate(15);
+        $posts = $postRepo->getAllPaginatedPost(15);
+
+        if (request()->wantsJson()) {
+            return response()->json([
+                'response' => 'success',
+                'results' => [
+                    compact('posts'),
+                ],
+            ]);
+        }
 
         return view('posts.index', compact('posts'));
     }
 
     public function show(Post $post)
     {
-        // return \App\Comment::with('replies')->get();
+        $post->load('comments.user');
 
-        $post->load('comments.user', 'comments.replies.user');
-
-        // return $post;
+        if (request()->wantsJson()) {
+            return $post;
+        }
 
         return view('posts.show', compact('post'));
     }
